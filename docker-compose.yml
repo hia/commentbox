@@ -1,0 +1,23 @@
+version: '2'
+services:
+  redis:
+    image: redis
+    container_name: commentbox-redis
+    networks:
+      - commentbox_net
+    ports:
+      - "6379:6379"
+  mongo:
+    image: mongo
+    container_name: commentbox-mongo
+    ports:
+      - 27017:27017
+    networks:
+      - commentbox_net
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1g"
+networks:
+  commentbox_net:
+    driver: bridge
